@@ -8,6 +8,11 @@ import java.util.stream.Collectors;
 
 public class RulesReader{
 
+	/**
+	 * reads the rules.txt file and saves it in a String
+	 * @return the rules as a String
+	 * @throws IOException
+	 */
 	public String getRules() throws IOException {
 		String output = "";
 		List<String> tmp = Files.lines(Path.of("rules.txt")).collect(Collectors.toList());

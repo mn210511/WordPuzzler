@@ -18,9 +18,11 @@ public class MainMenueWindow {
 	
 	
 	
-	
+	/**
+	 * default constructor
+	 */
 	public MainMenueWindow() {
-		// TODO Auto-generated constructor stub
+	
 	}
 	
 	public MainMenueWindow(Stage stage) {
@@ -28,6 +30,10 @@ public class MainMenueWindow {
 		this.stage = stage;
 	}
 	
+	/**
+	 * changes the the scene to the mainmenue-Scene
+	 * @throws IOException
+	 */
 	public void changeScene() throws IOException {
 FXMLLoader loader = new FXMLLoader(getClass().getResource(Constant.MAIN_MENUE_FXML));
 		
@@ -39,7 +45,11 @@ FXMLLoader loader = new FXMLLoader(getClass().getResource(Constant.MAIN_MENUE_FX
 		
 		stage.setScene(scene);
 	}
-	
+	/**
+	 * returns the mainMenue-Scene to the caller
+	 * @return the mainMenue-Scene
+	 * @throws IOException
+	 */
 	public Scene getScene() throws IOException{
 FXMLLoader loader = new FXMLLoader(getClass().getResource(Constant.MAIN_MENUE_FXML));		
 		Parent root = loader.load();

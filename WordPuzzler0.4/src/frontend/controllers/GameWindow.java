@@ -18,9 +18,11 @@ public class GameWindow {
 	
 	
 	
-	
+	/**
+	 * default constructor
+	 */
 	public GameWindow() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public GameWindow(Stage stage) {
@@ -34,8 +36,8 @@ public class GameWindow {
 		Parent root = loader.load();
 
 		//GameViewController ctrl = loader.getController();
-		
-	;
+	
+	
 		Scene scene = new Scene(root, 1000, 900);
 		scene.getStylesheets().add(getClass().getResource(Constant.STYLE_SHEET).toExternalForm());
 		

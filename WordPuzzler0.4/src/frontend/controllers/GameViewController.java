@@ -479,7 +479,7 @@ public class GameViewController extends CommonPropertyController {
 
 		disableControlls();
 
-		window.changeScene();
+		window.showResultScreen();
 	}
 
 	/**

@@ -18,7 +18,9 @@ public class ScoreBoardWindow {
 	
 	
 	
-	
+	/**
+	 * default constructor
+	 */
 	public ScoreBoardWindow() {
 		// TODO Auto-generated constructor stub
 	}
@@ -27,7 +29,10 @@ public class ScoreBoardWindow {
 
 		this.stage = stage;
 	}
-	
+	/**
+	 * changes the scene in the main-Stage to the scoreBoard scene
+	 * @throws IOException
+	 */
 	public void changeScene() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(Constant.SCOAR_BOARD_FXML));
 
@@ -41,7 +46,11 @@ public class ScoreBoardWindow {
 	
 		stage.setScene(scene);
 	}
-	
+	/**
+	 * gives the caller the Scoarboard-Scene
+	 * @return the scoreboard-Scene
+	 * @throws IOException
+	 */
 	public Scene getScene() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(Constant.SCOAR_BOARD_FXML));
 

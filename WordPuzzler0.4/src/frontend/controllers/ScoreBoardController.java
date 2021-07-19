@@ -155,6 +155,9 @@ public class ScoreBoardController extends CommonPropertyController {
 		reload();
 	}
 
+	/**
+	 * fills the leaderboard and the board with the personal statistiks
+	 */
 	private void reload() {
 
 		this.leaderboard.set(FXCollections.observableArrayList(playerRepo.getLeaderBoard()));
@@ -168,7 +171,11 @@ public class ScoreBoardController extends CommonPropertyController {
 		window.changeScene();
 
 	}
-
+/**
+ * Handler for the Delete-Button. Tells the GameDataRepository to delete all the GameDAta and Player data from the Database that are related 
+ * to the current Player. 
+ * @param ae
+ */
 	@FXML
 	private void onDelete(ActionEvent ae) {
 		if (MessageBox.show("Delete UserData", "Wirklich alle User-Daten löschen?", AlertType.CONFIRMATION,
@@ -176,13 +183,22 @@ public class ScoreBoardController extends CommonPropertyController {
 			gameDataRepo.deleteUserData(player.getUsername());
 			playerRepo.deletePlayer(player);
 			Player tmp = new Player(player.getUsername());
+			// add empty(excl. the Username) Player-Object to the database
+			// if not the next time he plays a game his data will not be safed because
+			// the database is missing the key to the player object
 			playerRepo.insertPlayer(tmp);
+			// refresh the player
 			player = tmp;
 			reload();
 		}
 
 	}
 
+	/**
+	 * formatting for the LocalDate Cells
+	 * @param column
+	 * @return the formatted TableCell
+	 */
 	private TableCell<GameData, LocalDateTime> createLocalDateCell(TableColumn<GameData, LocalDateTime> column) {
 
 		return new TableCell<GameData, LocalDateTime>() {
@@ -201,6 +217,11 @@ public class ScoreBoardController extends CommonPropertyController {
 
 	}
 
+	/**
+	 * formatting for the Duration Cell
+	 * @param column
+	 * @return the formatted TableCell
+	 */
 	private TableCell<GameData, Long> createDurationCell(TableColumn<GameData, Long> column) {
 
 		return new TableCell<GameData, Long>() {

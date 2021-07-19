@@ -15,26 +15,32 @@ public class ResultScreenWindow {
 
 	
 
-	private Stage stage;
+	private Stage primaryStage;
 	private GameData game;
 	
 	
 	
 	
-	
+	/** 
+	 * default constructor
+	 */
 	public ResultScreenWindow() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ResultScreenWindow(Stage stage, GameData game) {
+	public ResultScreenWindow(Stage primaryStage, GameData game) {
 
-		this.stage = stage;
+		this.primaryStage = primaryStage;
 		this.game = game;
 		
 	}
 	
-	
-	public void changeScene() throws IOException {
+	/**
+	 * opens the resultscreen in a new Window and waits for the users selected Menue to 
+	 * set the selected scene in the mainStage
+	 * @throws IOException
+	 */
+	public void showResultScreen() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(Constant.RESULT_SCREEN_FXML));
 
 		Parent root = loader.load();
@@ -43,7 +49,7 @@ public class ResultScreenWindow {
 		
 		ctrl.sendData(game);
 
-		//System.out.println("Spiel gesetzt" + game.toString());
+	
 		Scene scene = new Scene(root, 700, 800);
 		Stage stageResult = new Stage(StageStyle.DECORATED);
 		stageResult.setScene(scene);
@@ -51,7 +57,8 @@ public class ResultScreenWindow {
 		stageResult.initModality(Modality.APPLICATION_MODAL);
 		stageResult.showAndWait();
 	if(ctrl.scene != null) {
-		stage.setScene(ctrl.getScene());
+		// set the selected Scene in the primaryStage
+		primaryStage.setScene(ctrl.getScene());
 	}
 	}
 	

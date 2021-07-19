@@ -23,6 +23,11 @@ public interface GameDataRepository {
 	 */
 	void insertData(GameData data);
 	
+	/**
+	 * loads the avg score from the player object from the database
+	 * @param player the player whos avg score should be loaded
+	 * @return the average score
+	 */
 	int avgScore(Player player);
 
 }

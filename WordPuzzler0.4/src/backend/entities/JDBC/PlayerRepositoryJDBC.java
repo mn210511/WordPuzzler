@@ -76,6 +76,10 @@ public class PlayerRepositoryJDBC implements PlayerRepository {
 		}
 	}
 
+	/**
+	 * loads a list with all the player objects
+	 * @return a list with player objects
+	 */
 	private List<Player> loadData() {
 		List<Player> leaderBoard = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(url, host, password)) {

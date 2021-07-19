@@ -131,6 +131,7 @@ public void deleteUserData(String username) {
 
 	}
 
+	
 	@Override
 	public int avgScore(Player player) {
 		int ret = 0;
@@ -148,10 +149,7 @@ public void deleteUserData(String username) {
 		} catch (SQLException e) {
 			MessageBox.show("Error", e.getMessage());
 		}
-		
-		
-		
-		
+			
 		return ret;
 		
 	}
