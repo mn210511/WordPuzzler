@@ -32,7 +32,7 @@ public class ResultScreenController extends CommonPropertyController{
     private Label lblScore;
   
    
-    Scene scene;
+    Scene selectedScene;
 
     
     
@@ -41,42 +41,63 @@ public class ResultScreenController extends CommonPropertyController{
 	
 		
 	}
+	/**
+	 * calls the getScene Method from the MainMenueWindow and safes it in the selectedScene attribute
+	 * @param ae
+	 * @throws IOException
+	 */
 	@FXML
 	private void onMainMenue(ActionEvent ae) throws IOException {
 
 		MainMenueWindow window = new MainMenueWindow(((Stage) btnMainMenue.getScene().getWindow()));
-		scene = window.getScene();
+		selectedScene = window.getScene();
 		Stage stg = (Stage) btnMainMenue.getScene().getWindow();
 		stg.close();
 
 	}
+	/**
+	 * calls the getScene Method from the GameWindow and safes it in the selectedScene attribute
+	 * @param ae
+	 * @throws IOException
+	 */
 	@FXML
 	private void onNewGame(ActionEvent ae) throws IOException {
 
 		GameWindow window = new GameWindow((Stage) btnMainMenue.getScene().getWindow());
-		scene = window.getScene();
+		selectedScene = window.getScene();
 		Stage stg = (Stage) btnMainMenue.getScene().getWindow();
 		stg.close();
 	}
-		
+	/**
+	 * calls the getScene Method from the ScoreBoardWindow and safes it in the selectedScene attribute
+	 * @param ae
+	 * @throws IOException
+	 */
 	@FXML
 	private void onScoreBoard(ActionEvent ae) throws IOException {
 
 	ScoreBoardWindow window = new ScoreBoardWindow((Stage) btnMainMenue.getScene().getWindow());
-	scene = window.getScene();
+	selectedScene = window.getScene();
 	Stage stg = (Stage) btnMainMenue.getScene().getWindow();
 	stg.close();
 	
 	}
 	
+	/**
+	 * method to set the the score from the label from outside
+	 * @param game
+	 */
 	public void sendData(GameData game) {
 			
 		lblScore.setText("" + game.getScore());
 		
 		}
-	
+	/**
+	 * returns the selectedScene
+	 * @return the selected Scene
+	 */
 	public Scene getScene() {
-		return scene;
+		return selectedScene;
 	}
 	
 	

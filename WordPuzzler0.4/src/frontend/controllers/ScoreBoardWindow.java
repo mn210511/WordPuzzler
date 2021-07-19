@@ -12,7 +12,7 @@ public class ScoreBoardWindow {
 
 	
 
-	private Stage stage;
+	private Stage primaryStage;
 	
 	
 	
@@ -25,9 +25,9 @@ public class ScoreBoardWindow {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ScoreBoardWindow(Stage stage) {
+	public ScoreBoardWindow(Stage primaryStage) {
 
-		this.stage = stage;
+		this.primaryStage = primaryStage;
 	}
 	/**
 	 * changes the scene in the main-Stage to the scoreBoard scene
@@ -44,7 +44,7 @@ public class ScoreBoardWindow {
 		
 		Scene scene = new Scene(root, 1200, 700);
 	
-		stage.setScene(scene);
+		primaryStage.setScene(scene);
 	}
 	/**
 	 * gives the caller the Scoarboard-Scene

@@ -56,7 +56,7 @@ public class ResultScreenWindow {
 
 		stageResult.initModality(Modality.APPLICATION_MODAL);
 		stageResult.showAndWait();
-	if(ctrl.scene != null) {
+	if(ctrl.selectedScene != null) {
 		// set the selected Scene in the primaryStage
 		primaryStage.setScene(ctrl.getScene());
 	}
