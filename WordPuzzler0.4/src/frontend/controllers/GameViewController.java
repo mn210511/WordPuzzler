@@ -71,6 +71,8 @@ public class GameViewController extends CommonPropertyController {
 	private
 
 	Timer myTimer;
+	
+	String rules;
 
 	@FXML
 	private Label lblScore;
@@ -162,15 +164,16 @@ public class GameViewController extends CommonPropertyController {
 		Thread t1 = new Thread(new Runnable() {
 			
 			@Override
-			public void run() {
-		
-					Platform.runLater(() -> {
-						try {
-							txtRules.setText(new RulesReader().getRules());
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+			public void run() {		
+				try {
+					rules = new RulesReader().getRules();
+				} catch (IOException e) {
+				
+					e.printStackTrace();
+				}
+	
+			Platform.runLater(() -> {
+			txtRules.setText(rules);
 					});
 
 				}
