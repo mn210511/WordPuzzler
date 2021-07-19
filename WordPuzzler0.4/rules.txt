@@ -1,0 +1,18 @@
+Regeln:
+
+- Wörter müssen vertikal gelegt werden
+- mindestens ein Buchstabe muss mit dem des horizontal gelegten Wortes übereinstimmen
+- Punkte werden anhand der im Wort enthaltenen Buchstaben wie folgt gewertet.
+
+Wertung:
+
+1 Punkt: E , N , S, I , R , T , U , A , D
+2 Punkte: H, G , L , O
+3 Punkte: M, B, W, Z
+4 Punkte: C, F, K , P
+6 Punkte: Ä , J , Ü , V
+8 Punkte: Ö , X
+10 Punkte: Q, Y
+
+
+
