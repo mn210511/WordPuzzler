@@ -24,7 +24,10 @@ public class ScoreBoardWindow {
 	public ScoreBoardWindow() {
 		// TODO Auto-generated constructor stub
 	}
-	
+	/**
+	 * constructor with a Stage parameter. Needed to pass over the primaryStage
+	 * @param primaryStage the primaryStage where we want the new scene to be set
+	 */
 	public ScoreBoardWindow(Stage primaryStage) {
 
 		this.primaryStage = primaryStage;

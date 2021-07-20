@@ -12,7 +12,7 @@ public class MainMenueWindow {
 
 	
 
-	private Stage stage;
+	private Stage primaryStage;
 	
 	
 	
@@ -24,10 +24,13 @@ public class MainMenueWindow {
 	public MainMenueWindow() {
 	
 	}
-	
-	public MainMenueWindow(Stage stage) {
+	/**
+	 * constructor with a Stage parameter. Needed to pass over the primaryStage
+	 * @param primaryStage
+	 */
+	public MainMenueWindow(Stage primaryStage) {
 
-		this.stage = stage;
+		this.primaryStage = primaryStage;
 	}
 	
 	/**
@@ -43,7 +46,7 @@ FXMLLoader loader = new FXMLLoader(getClass().getResource(Constant.MAIN_MENUE_FX
 		Scene scene = new Scene(root, 700, 800);
 		
 		
-		stage.setScene(scene);
+		primaryStage.setScene(scene);
 	}
 	/**
 	 * returns the mainMenue-Scene to the caller

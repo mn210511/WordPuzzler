@@ -27,7 +27,11 @@ public class ResultScreenWindow {
 	public ResultScreenWindow() {
 		// TODO Auto-generated constructor stub
 	}
-	
+/**
+ * constructor with a Stage parameter. Needed to pass over the primaryStage
+ * @param primaryStage the primaryStage where we want the new scene to be set
+ * @param game the current gameData - object
+ */
 	public ResultScreenWindow(Stage primaryStage, GameData game) {
 
 		this.primaryStage = primaryStage;

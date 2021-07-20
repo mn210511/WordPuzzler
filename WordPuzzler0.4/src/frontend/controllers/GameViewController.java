@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import app.MessageBox;
+import app.Navigator;
 import backend.controller.PointJudge;
 import backend.controller.RulesReader;
 import backend.entities.GameData;
@@ -28,6 +29,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -71,13 +74,13 @@ public class GameViewController extends CommonPropertyController {
 	private
 
 	Timer myTimer;
-	
+
 	String rules;
 
 	@FXML
 	private Label lblScore;
 
-	private final static int BOARD_ROWS = 10;
+	public final static int BOARD_ROWS = 10;
 	private final static int BEGINN_WORD_ROW = 3;
 	private int numberColumns = 0;
 	private boolean setSuccessfull = false;
@@ -95,6 +98,16 @@ public class GameViewController extends CommonPropertyController {
 
 	}
 
+	public GridPane getGridBoard() {
+		return gridBoard;
+	}
+	public Position getCurrentPosition() {
+		return currentPosition;
+	}
+	public int getNumberColumns() {
+		return numberColumns;
+	}
+	
 	@FXML
 	private void initialize() {
 
@@ -106,22 +119,36 @@ public class GameViewController extends CommonPropertyController {
 		lblScore.setText("0");
 		System.out.println("player name:'" + player.getUsername() + "' is playing");
 		game.setPlayer(player);
+		
+		
 
-		// does not work as it should. on KeyPress it automatically presses the buttons
-		// because they have the focus
 
+
+		
 //		gridBoard.setOnKeyPressed(new EventHandler<KeyEvent>() {
 //			
 //			@Override
 //			public void handle(KeyEvent event) {
 //				if(event.getCode() == KeyCode.ENTER) {
-//					
-//					currentPosition.realocate((currentPosition.getX()+1), currentPosition.getY()+1);
+//					currentPosition.realocate((currentPosition.getY()+1), currentPosition.getX());
+//					// if User reaches the end of the board reset position
+//					if(currentPosition.getY()==BOARD_ROWS) {
+//						currentPosition.realocate((0), currentPosition.getX());
+//					}
+//					for (Node n : gridBoard.getChildren()) {
+//						((StackPane) n).pseudoClassStateChanged(PseudoClass.getPseudoClass("pressed"), false);
+//						if (GridPane.getColumnIndex(n) == currentPosition.getX() && GridPane.getRowIndex(n) == currentPosition.getY()) {
+//							((StackPane) n).pseudoClassStateChanged(PseudoClass.getPseudoClass("pressed"), true);
+//						}
+//					}
+//			
 //				}
 //				
 //			};
 //				
 //		});
+		
+		gridBoard.setOnKeyPressed(new Navigator(this));
 
 		String beginn = val.getRandomWord().toUpperCase();
 		txtRules.setEditable(false);
@@ -162,27 +189,23 @@ public class GameViewController extends CommonPropertyController {
 		});
 
 		Thread t1 = new Thread(new Runnable() {
-			
+
 			@Override
-			public void run() {		
+			public void run() {
 				try {
 					rules = new RulesReader().getRules();
 				} catch (IOException e) {
-				
 					e.printStackTrace();
 				}
-	
-			Platform.runLater(() -> {
-			txtRules.setText(rules);
-					});
-
-				}
-			
+				Platform.runLater(() -> {
+					txtRules.setText(rules);
+				});
+			}
 		});
-		
-		t1.start();
-	
 
+		t1.start();
+		//set the focus to anywhere to make the keyhandler work 
+		gridBoard.requestFocus();
 	}
 
 	/**
@@ -229,10 +252,10 @@ public class GameViewController extends CommonPropertyController {
 				tmp.getStyleClass().add("letter");
 				p.getChildren().add(tmp);
 				p.getStyleClass().add("stack-pane");
-				// p.setPrefSize(45, 45);
+			
 				p.addEventHandler(MouseEvent.MOUSE_CLICKED, new MouseHandler());
 				gridBoard.add(p, x, y);
-				// this lines align the nodes that we prepare for the text to the center
+				// align the nodes that we prepare for the text to the center
 				GridPane.setHalignment(p, HPos.CENTER);
 				GridPane.setValignment(p, VPos.CENTER);
 
@@ -265,8 +288,9 @@ public class GameViewController extends CommonPropertyController {
 				System.out.println("y = " + currentPosition.getY() + " x =" + currentPosition.getX());
 				setSuccessfull = false;
 			}
+			gridBoard.requestFocus();
 		}
-
+		
 	}
 
 	/**
@@ -279,6 +303,7 @@ public class GameViewController extends CommonPropertyController {
 
 	@FXML
 	private void clickedLetter(ActionEvent ev) {
+		
 		setSuccessfull = false;
 		Object obj = ev.getSource();
 		Button clickedButton = (Button) obj;
@@ -291,6 +316,8 @@ public class GameViewController extends CommonPropertyController {
 
 			addLetterToGrid(currentPosition, selectedLetter);
 		}
+		//TODO: test more
+		gridBoard.requestFocus();
 	}
 
 	/**
@@ -303,7 +330,7 @@ public class GameViewController extends CommonPropertyController {
 	private void addLetterToGrid(Position p, char letter) {
 		for (Node n : gridBoard.getChildren()) {
 			if (GridPane.getColumnIndex(n) == p.getX() && GridPane.getRowIndex(n) == p.getY()) {
-
+				
 				if (n instanceof StackPane) {
 					Node t = ((StackPane) n).getChildren().get(0);
 					n.getStyleClass().add("cellFilled");
@@ -333,49 +360,55 @@ public class GameViewController extends CommonPropertyController {
 	@FXML
 	private void onSubmit(ActionEvent ev) {
 
-		String result = gameBoard.getLastWord(currentPosition.getX());
+		// Try catch block because if the word has an empty space the getWordFromColumn will throw an exception
+		try {
+			String result = gameBoard.getWordFromColumn(currentPosition.getX());
 
-		if (val.testWord(result)) {
-			usedColumn.add(currentPosition.getX());
-			int points = PointJudge.rate(result);
-			game.setScore(game.getScore() + points);
-			// txtRules.setText(txtRules.getText() + "\n" + result);
-			lblScore.setText("" + game.getScore());
-			setSuccessfull = true;
-			Label tmp = new Label(result + " - " + points + "pts");
-			tmp.getStyleClass().add("label-history");
-			historyContainer.getChildren().add(tmp);
+			if (val.testWord(result)) {
+				usedColumn.add(currentPosition.getX());
+				int points = PointJudge.rate(result);
+				game.setScore(game.getScore() + points);
+				// txtRules.setText(txtRules.getText() + "\n" + result);
+				lblScore.setText("" + game.getScore());
+				setSuccessfull = true;
+				Label tmp = new Label(result + " - " + points + "pts");
+				tmp.getStyleClass().add("label-history");
+				historyContainer.getChildren().add(tmp);
 
-			if (usedColumn.size() == numberColumns) {
+				if (usedColumn.size() == numberColumns) {
 
-				try {
-					finishGame();
-				} catch (IOException e) {
-					System.err.println("Fehler beim laden des ResultScreens" + e.getMessage());
+					try {
+						finishGame();
+					} catch (IOException e) {
+						System.err.println("Fehler beim laden des ResultScreens" + e.getMessage());
+					}
 				}
-			}
-			for (int i = 0; i < 10; i++) {
-				if (!usedColumn.contains(i)) {
-					currentPosition.realocate(0, i);
+				for (int i = 0; i < 10; i++) {
+					if (!usedColumn.contains(i)) {
+						currentPosition.realocate(0, i);
 
-					System.out.println("y = " + currentPosition.getY());
+						System.out.println("y = " + currentPosition.getY());
 
-					System.out.println("x = " + currentPosition.getX());
-					break;
+						System.out.println("x = " + currentPosition.getX());
+						break;
+					}
 				}
-			}
-		} else {
-			if (MessageBox.show("word not found",
-					"Wort \"%s\" nicht ist nicht im Woerterbuch \n Wort hinzufuegen?".formatted(result),
-					AlertType.CONFIRMATION, ButtonType.YES, ButtonType.NO) == ButtonType.YES) {
-				if (val.addWord(result.toLowerCase()) == true) {
-					onSubmit(ev);
-				} else {
-					MessageBox.show("Error", "Wort hinzufuegen war nicht erfolgreich");
+			} else {
+				if (MessageBox.show("word not found",
+						"Wort \"%s\" nicht ist nicht im Wörterbuch \n Wort hinzufügen?".formatted(result),
+						AlertType.CONFIRMATION, ButtonType.YES, ButtonType.NO) == ButtonType.YES) {
+					if (val.addWord(result.toLowerCase()) == true) {
+						onSubmit(ev);
+					} else {
+						MessageBox.show("Error", "Wort hinzufügen war nicht erfolgreich");
+					}
+
 				}
 
 			}
-
+		} catch (Exception e) {
+			MessageBox.show("Fehler", e.getMessage());
+		
 		}
 
 	}
@@ -397,6 +430,7 @@ public class GameViewController extends CommonPropertyController {
 					for (Node n : gridBoard.getChildren()) {
 						if (GridPane.getColumnIndex(n) == currentPosition.getX() && GridPane.getRowIndex(n) == i) {
 							if (n instanceof StackPane) {
+								// index 1 because it is the 2nd class that we have set
 								n.getStyleClass().remove(1);
 								Node t = ((StackPane) n).getChildren().get(0);
 								;
@@ -408,7 +442,8 @@ public class GameViewController extends CommonPropertyController {
 						}
 					}
 				}
-
+				// if 'i' hits the row with the beginnWord we want to skip
+				// the startword should never be changed
 				if (i == BEGINN_WORD_ROW - 1) {
 					i++;
 				}
