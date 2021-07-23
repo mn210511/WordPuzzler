@@ -54,7 +54,7 @@ public class ResultScreenWindow {
 		ctrl.sendData(game);
 
 	
-		Scene scene = new Scene(root, 700, 800);
+		Scene scene = new Scene(root, 550, 500);
 		Stage stageResult = new Stage(StageStyle.DECORATED);
 		stageResult.setScene(scene);
 

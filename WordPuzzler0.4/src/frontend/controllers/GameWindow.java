@@ -45,7 +45,7 @@ public class GameWindow {
 	
 	
 	
-		Scene scene = new Scene(root, 1000, 900);
+		Scene scene = new Scene(root, 1500, 1000);
 		scene.getStylesheets().add(getClass().getResource(Constant.STYLE_SHEET).toExternalForm());
 		
 		primaryStage.setScene(scene);
@@ -61,6 +61,6 @@ public class GameWindow {
 
 		Parent root = loader.load();
 		
-		return new Scene(root, 1000, 900);
+		return new Scene(root, 1500, 1000);
 	}
 }

@@ -45,7 +45,7 @@ public class ScoreBoardWindow {
 
 		ctrl.load();
 		
-		Scene scene = new Scene(root, 1200, 700);
+		Scene scene = new Scene(root, 1500, 1000);
 	
 		primaryStage.setScene(scene);
 	}
@@ -61,7 +61,7 @@ public class ScoreBoardWindow {
 		ScoreBoardController ctrl = loader.getController();
 
 		ctrl.load();
-		return new Scene(root, 1200, 700);
+		return new Scene(root, 1500, 1000);
 	}
 	
 }

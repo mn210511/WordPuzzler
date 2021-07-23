@@ -10,5 +10,7 @@ public class Constant {
 	public final static String RESULT_SCREEN_FXML = "/frontend/views/resultScreen.fxml";
 	public final static String GAME_VIEW_FXML = "/frontend/views/gameView.fxml";
 	public final static String DICTIONARY = "dict.txt";
+	public final static String MARIA_DB_USER =	"root";
+	public final static String MARIA_DB_PASSWORD =	"";
 	
 }

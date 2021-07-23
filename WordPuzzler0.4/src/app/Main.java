@@ -1,6 +1,6 @@
 package app;
 
-import backend.controller.Validator;
+import backend.services.Dictionary;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,7 +25,7 @@ public class Main extends Application{
 		scene.getStylesheets().add(getClass().getResource(Constant.STYLE_SHEET).toExternalForm());
 		
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Erste Tests");
+		primaryStage.setTitle("Word Puzzler");
 		primaryStage.show();
 		
 		
@@ -43,7 +43,7 @@ public class Main extends Application{
 	@Override
 	public void stop() throws Exception {
 		
-		new Validator().write();
+		new Dictionary().write();
 		
 		super.stop();
 	}

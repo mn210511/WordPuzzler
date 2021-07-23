@@ -2,7 +2,7 @@ package frontend.controllers;
 
 import backend.entities.Position;
 
-public class GameBoard {
+public class GameBoardController {
 
 	
 	
@@ -14,7 +14,7 @@ public class GameBoard {
 	 * @param rows number of rows
 	 * @param columns number of columns
 	 */
-	public GameBoard(int rows, int columns) {
+	public GameBoardController(int rows, int columns) {
 			virtuellBoard = new char[rows][columns];
 			System.out.println("board erzeugt" + rows + " " + columns);
 	}
@@ -91,20 +91,7 @@ public class GameBoard {
 		return result;
 	}
 	
-	
-//	public String getWordFromColumn(int column) {
-//		String result = "";
-//		for (int i = 0; i < virtuellBoard.length; i++) {
-//			if (virtuellBoard[i][column] != 0) {
-//				
-//				result = result.concat(String.valueOf(virtuellBoard[i][column]));
-//				System.out.println("output" + result);
-//			}
-//
-//		}
-//		return result;
-//	}
-	
+
 	
 	
 	

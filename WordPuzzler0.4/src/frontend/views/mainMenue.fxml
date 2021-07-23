@@ -15,11 +15,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane hgap="10.0" minHeight="300.0" minWidth="100.0" prefHeight="964.0" prefWidth="588.0" styleClass="background-Color" stylesheets="@styles.css" vgap="10.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.MainMenueController">
+<GridPane hgap="10.0" minWidth="100.0" styleClass="background-Color" stylesheets="@styles.css" vgap="10.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.MainMenueController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" />
-      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" />
+    <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="50.0" prefWidth="50.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="464.0" minWidth="10.0" prefWidth="454.0" />
+      <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="50.0" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints minHeight="50.0" vgrow="ALWAYS" />

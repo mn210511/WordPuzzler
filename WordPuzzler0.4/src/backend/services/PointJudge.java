@@ -1,4 +1,4 @@
-package backend.controller;
+package backend.services;
 
 import backend.entities.Points;
 

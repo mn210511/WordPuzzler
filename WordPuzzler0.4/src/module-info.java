@@ -12,7 +12,7 @@ module wordPuzzler {
 
 	opens frontend.controllers;
 	opens app;
-	opens backend.controller;
+	opens backend.services;
 
 	opens backend.entities;
 	opens frontend.views;

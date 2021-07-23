@@ -43,7 +43,7 @@ FXMLLoader loader = new FXMLLoader(getClass().getResource(Constant.MAIN_MENUE_FX
 		Parent root = loader.load();
 		//MainMenueController ctrl = loader.getController();
 
-		Scene scene = new Scene(root, 700, 800);
+		Scene scene = new Scene(root, 650, 800);
 		
 		
 		primaryStage.setScene(scene);
@@ -57,6 +57,6 @@ FXMLLoader loader = new FXMLLoader(getClass().getResource(Constant.MAIN_MENUE_FX
 FXMLLoader loader = new FXMLLoader(getClass().getResource(Constant.MAIN_MENUE_FXML));		
 		Parent root = loader.load();
 		 
-		return new Scene(root, 700, 800);
+		return new Scene(root, 650, 800);
 	}
 }

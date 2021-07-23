@@ -56,7 +56,7 @@
                 <CategoryAxis fx:id="sbcX" prefHeight="10.0" prefWidth="178.0" side="BOTTOM" tickLabelsVisible="false" />
               </xAxis>
               <yAxis>
-                <NumberAxis fx:id="sbcY" label="Spieldauer in Minuten" side="LEFT" tickLabelFill="WHITE" tickLabelRotation="-26.6">
+                <NumberAxis fx:id="sbcY" label="Spieldauer in Sekunden" side="LEFT" tickLabelFill="WHITE" tickLabelRotation="-26.6">
                      <tickLabelFont>
                         <Font name="System Bold" size="12.0" />
                      </tickLabelFont></NumberAxis>

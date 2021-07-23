@@ -1,4 +1,4 @@
-package backend.controller;
+package backend.services;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -10,9 +10,8 @@ import java.util.stream.Collectors;
 
 import app.Constant;
 import app.MessageBox;
-import frontend.controllers.ResultScreenController;
 
-public class Validator {
+public class Dictionary {
 	private static List<String> dictionary;
 	
 	static {
@@ -20,8 +19,9 @@ public class Validator {
 			dictionary = Files.lines(Path.of(Constant.DICTIONARY)).collect(Collectors.toList());
 
 		} catch (IOException e) {
-			MessageBox.show("Error", e.getMessage());
+			MessageBox.show("Error", "Fehler beim Laden des Wörterbuches \n gelegte Wörter können nicht geprüft werden");
 			e.printStackTrace();
+			
 		}
 	}
 
@@ -59,18 +59,24 @@ public class Validator {
 		try {
 			Files.write(Path.of(Constant.DICTIONARY), dictionary, Charset.forName("UTF-8"));
 		} catch (IOException e) {
-			MessageBox.show("Error", e.getMessage());
+			MessageBox.show("Error", "Wörterbuch konnte nicht gespeichert werden \n Hinzugefügte Wörter sind verloren gegangen");
+			e.printStackTrace();
 		}
 	}
 	
 	/**
-	 * searches a random word from the dictionary and returns it
+	 * searches a random word (bigger then 6 letters and smaller then 16 letters) from the dictionary and returns it
 	 * 
 	 * @return a randow word from the dictionary
 	 */
 	public String getRandomWord() {
 		Random rng = new Random();
-		return dictionary.get(rng.ints(0, dictionary.size()).findFirst().getAsInt());
+		String ret = dictionary.get(rng.ints(0, dictionary.size()).findFirst().getAsInt());
+		if(ret.length() > 15 || ret.length() < 6) {
+			 ret = getRandomWord();
+		} 
+		return ret;
+		 
 	}
 
 }

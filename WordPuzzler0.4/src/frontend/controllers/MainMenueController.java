@@ -7,6 +7,7 @@ import app.MessageBox;
 import backend.entities.Login;
 import backend.entities.LoginRepository;
 import backend.entities.Player;
+import backend.entities.JDBC.LoginRepositoryJDBC;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
@@ -70,7 +71,7 @@ public class MainMenueController extends CommonPropertyController{
 		txtUserName.textProperty().addListener((o, oldVal, newVal) -> notEmpty());
 		txtPassword.textProperty().addListener((o, oldVal, newVal) -> notEmpty());
 
-		loginRepository = new LoginRepository(Constant.MARIA_DB_URL, "root", "");
+		loginRepository = new LoginRepositoryJDBC(Constant.MARIA_DB_URL, Constant.MARIA_DB_USER, Constant.MARIA_DB_PASSWORD);
 				
 		
 	
@@ -193,7 +194,7 @@ public class MainMenueController extends CommonPropertyController{
 				// insert a new player entity into the database
 				playerRepo.insertPlayer(new Player(txtUserName.getText()));
 			} catch (Exception e) {
-				MessageBox.show("Error", e.getMessage());
+				MessageBox.show("Error", "Fehler beim erstellen des Accounts " + e.getMessage());
 			}
 		}
 

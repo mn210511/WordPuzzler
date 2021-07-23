@@ -9,10 +9,10 @@ import java.util.TimerTask;
 
 import app.MessageBox;
 import app.Navigator;
-import backend.controller.PointJudge;
-import backend.controller.RulesReader;
 import backend.entities.GameData;
 import backend.entities.Position;
+import backend.services.PointJudge;
+import backend.services.RulesReader;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -88,7 +88,7 @@ public class GameViewController extends CommonPropertyController {
 
 	private GameData game;
 	private HashSet<Integer> usedColumn;
-	private GameBoard gameBoard;
+	private GameBoardController gameBoard;
 	private Position currentPosition = new Position(0, 0);
 	BooleanProperty bool = new SimpleBooleanProperty();
 
@@ -120,34 +120,8 @@ public class GameViewController extends CommonPropertyController {
 		System.out.println("player name:'" + player.getUsername() + "' is playing");
 		game.setPlayer(player);
 		
-		
 
-
-
-		
-//		gridBoard.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//			
-//			@Override
-//			public void handle(KeyEvent event) {
-//				if(event.getCode() == KeyCode.ENTER) {
-//					currentPosition.realocate((currentPosition.getY()+1), currentPosition.getX());
-//					// if User reaches the end of the board reset position
-//					if(currentPosition.getY()==BOARD_ROWS) {
-//						currentPosition.realocate((0), currentPosition.getX());
-//					}
-//					for (Node n : gridBoard.getChildren()) {
-//						((StackPane) n).pseudoClassStateChanged(PseudoClass.getPseudoClass("pressed"), false);
-//						if (GridPane.getColumnIndex(n) == currentPosition.getX() && GridPane.getRowIndex(n) == currentPosition.getY()) {
-//							((StackPane) n).pseudoClassStateChanged(PseudoClass.getPseudoClass("pressed"), true);
-//						}
-//					}
-//			
-//				}
-//				
-//			};
-//				
-//		});
-		
+		//adding the eventHandler, needed to navigate through the board with the arrow keys
 		gridBoard.setOnKeyPressed(new Navigator(this));
 
 		String beginn = val.getRandomWord().toUpperCase();
@@ -156,7 +130,7 @@ public class GameViewController extends CommonPropertyController {
 		char[] beginnArray = beginn.toCharArray();
 		numberColumns = beginnArray.length;
 		// the 'virtuelle' pitch
-		gameBoard = new GameBoard(BOARD_ROWS, beginnArray.length);
+		gameBoard = new GameBoardController(BOARD_ROWS, beginnArray.length);
 
 		createPitch(beginnArray);
 
@@ -195,7 +169,9 @@ public class GameViewController extends CommonPropertyController {
 				try {
 					rules = new RulesReader().getRules();
 				} catch (IOException e) {
+					MessageBox.show("Error", "Regeln konnten nicht geladen werden");
 					e.printStackTrace();
+					
 				}
 				Platform.runLater(() -> {
 					txtRules.setText(rules);
@@ -380,10 +356,11 @@ public class GameViewController extends CommonPropertyController {
 					try {
 						finishGame();
 					} catch (IOException e) {
+						MessageBox.show("Error", "Ergebniss Bildschirm konnte nicht geladen werden");
 						System.err.println("Fehler beim laden des ResultScreens" + e.getMessage());
 					}
 				}
-				for (int i = 0; i < 10; i++) {
+				for (int i = 0; i < numberColumns; i++) {
 					if (!usedColumn.contains(i)) {
 						currentPosition.realocate(0, i);
 
@@ -406,6 +383,8 @@ public class GameViewController extends CommonPropertyController {
 				}
 
 			}
+			// remove the focus from this button
+			gridBoard.requestFocus();
 		} catch (Exception e) {
 			MessageBox.show("Fehler", e.getMessage());
 		
@@ -449,6 +428,8 @@ public class GameViewController extends CommonPropertyController {
 				}
 			}
 		}
+		// remove the focus from this button;
+		gridBoard.requestFocus();
 	}
 
 	/**

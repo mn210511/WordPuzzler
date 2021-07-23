@@ -128,17 +128,22 @@ public class ScoreBoardController extends CommonPropertyController {
 		XYChart.Series<String, Long> series2 = new XYChart.Series<>(); 
 		
 		Object[] tmp = gameDataRepo.getPerScore(player).toArray();
-			
 		
-		for (int i = tmp.length-1; i >= tmp.length-5; i--) {
-			if(i== -1) {
-				break;
-			}
+		int index = 0;
+		
+		//check if there are more than 5 entities
+		if (tmp.length > 5) {
+			index = tmp.length-5;
+		}
+		
+		// add the last 5 matches into the charts
+		for (int i = index; i < tmp.length; i++) {
 			GameData entity = (GameData)tmp[i];
 			series.getData().add(new XYChart.Data<String, Integer>(String.valueOf(entity.getMatchend()), entity.getScore()));
 			series2.getData().add(new XYChart.Data<String, Long>(String.valueOf(entity.getMatchend()), TimeUnit.MILLISECONDS.toSeconds(entity.getDuration())));
 			
 		}
+		
 
 
 		chartLastMatches.getData().addAll(series);
@@ -165,10 +170,15 @@ public class ScoreBoardController extends CommonPropertyController {
 	}
 
 	@FXML
-	private void onMainMenue(ActionEvent ae) throws IOException {
+	private void onMainMenue(ActionEvent ae) {
 
-		MainMenueWindow window = new MainMenueWindow(((Stage) btnMainMenue.getScene().getWindow()));
-		window.changeScene();
+		try {
+			MainMenueWindow window = new MainMenueWindow(((Stage) btnMainMenue.getScene().getWindow()));
+			window.changeScene();
+		} catch (IOException e) {
+			MessageBox.show("Error", "Fehler beim Laden des Hauptmenüs", AlertType.ERROR, ButtonType.CLOSE);
+			e.printStackTrace();
+		}
 
 	}
 /**

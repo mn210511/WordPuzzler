@@ -29,6 +29,13 @@
 	-fx-border-width: 0.0 0.0 20.0 0.0;
 	-fx-border-color: linear-gradient(#003e64 0%,  white 100%);
 }
+.lblResultScreen{
+	-fx-text-fill: 	linear-gradient(white 0%,  #949695 100%);
+	-fx-font-weight: bold;
+	-fx-alignment: center;
+	-fx-background-color: linear-gradient(to top right, #41c239 0%, #003e64 100%);
+	-fx-background-radius: 100px 0.0px 100.0px 0.0px;
+}
 
 .label-mainMenue {
 	-fx-text-fill: white;
@@ -211,6 +218,8 @@
 
 	-fx-background-color: linear-gradient(to top right, f3c313 0%, white 100%) ;
 	-fx-text-fill: black;
+	-fx-border-color: #003e64;
+	-fx-border-width: 5px;
 	
 }
 
