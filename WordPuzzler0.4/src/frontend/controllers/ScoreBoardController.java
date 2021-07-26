@@ -232,7 +232,7 @@ public class ScoreBoardController extends CommonPropertyController {
 	 * @param column
 	 * @return the formatted TableCell
 	 */
-	private TableCell<GameData, Long> createDurationCcreateell(TableColumn<GameData, Long> column) {
+	private TableCell<GameData, Long> createDurationCell(TableColumn<GameData, Long> column) {
 
 		return new TableCell<GameData, Long>() {
 
