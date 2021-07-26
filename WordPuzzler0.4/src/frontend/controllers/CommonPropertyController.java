@@ -13,7 +13,7 @@ public abstract class CommonPropertyController {
 	public static PlayerRepository playerRepo = new PlayerRepositoryJDBC(Constant.MARIA_DB_URL, Constant.MARIA_DB_USER, Constant.MARIA_DB_PASSWORD);
 	public static Player player = new Player();
 	public static GameDataRepository gameDataRepo = new GameDataRepositoryJDBC(Constant.MARIA_DB_URL, Constant.MARIA_DB_USER, Constant.MARIA_DB_PASSWORD);
-	public static Dictionary val = new Dictionary();
+	public static Dictionary dictionary = new Dictionary();
 	
 	
 	

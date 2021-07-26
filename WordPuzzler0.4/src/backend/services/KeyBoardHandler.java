@@ -1,8 +1,9 @@
-package app;
+package backend.services;
+
+import java.util.Set;
 
 import frontend.controllers.GameViewController;
 import javafx.css.PseudoClass;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
@@ -17,25 +18,32 @@ import javafx.scene.layout.StackPane;
  * @author mn210
  *
  */
-public class Navigator implements EventHandler<KeyEvent>{
+public class KeyBoardHandler implements EventHandler<KeyEvent>{
 GameViewController controller;
-	
-	public Navigator(GameViewController controller) {
+
+// Set with all letters to check if the tipped key was one of them
+private static final Set<String> alphabet = Set.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", 
+		"m", "n", "o", "p","q", "r", "s", "t","u", "v", "w", "x","y", "z", "ä", "ö", "ü");
+
+	public KeyBoardHandler(GameViewController controller) {
 		this.controller = controller;
 	}
 	
 	@Override
 	public void handle(KeyEvent event) {
+		System.out.println("character" + event.getCharacter());
+		System.out.println("text" + event.getText());
+		System.out.println("code" + event.getCode());
 		if(event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.DOWN) {
 			handleDown();
 			controller.getGridBoard().requestFocus();
-			event.consume();
+			
 	
 		}
 		if(event.getCode() == KeyCode.LEFT) {
 			handleLeft();
 			controller.getGridBoard().requestFocus();
-			event.consume();
+		
 	
 		}
 		
@@ -49,6 +57,14 @@ GameViewController controller;
 			controller.getGridBoard().requestFocus();
 	
 		}
+
+		
+		if(alphabet.contains(event.getText())) {
+			controller.clickedLetter(event.getText().toString().toUpperCase());
+		}
+		
+		event.consume();
+	
 	}
 
 	/**

@@ -20,7 +20,7 @@
       <ColumnConstraints hgrow="ALWAYS" maxWidth="70.0" minWidth="10.0" prefWidth="70.0" />
     <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
       <ColumnConstraints halignment="CENTER" maxWidth="30.0" prefWidth="30.0" />
-      <ColumnConstraints halignment="CENTER" minWidth="150.0" />
+      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="200.0" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
@@ -333,15 +333,6 @@
                         <String fx:value="shadow" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="btnSs" mnemonicParsing="false" onAction="#clickedLetter" stylesheets="@styles.css" text="ß">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                     <styleClass>
-                        <String fx:value="buttonKeyboard" />
-                        <String fx:value="shadow" />
-                     </styleClass>
-                  </Button>
                   <Button fx:id="btnSwitch" minHeight="30.0" minWidth="70.0" mnemonicParsing="false" onAction="#onChange" stylesheets="@styles.css" text="Switch">
                      <styleClass>
                         <String fx:value="buttonKeyboard" />
@@ -465,11 +456,6 @@
                         <String fx:value="buttonKeyboard" />
                         <String fx:value="shadow" />
                      </styleClass>
-                  </Button>
-                  <Button fx:id="btnSs1" alignment="CENTER" mnemonicParsing="false" onAction="#clickedLetter" styleClass="buttonKeyboard" text="ß">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
                   </Button>
                </children>
                <VBox.margin>
@@ -668,7 +654,7 @@
                <children>
                   <Label alignment="CENTER" styleClass="shadow" stylesheets="@styles.css" text="Verlauf:">
                      <font>
-                        <Font size="40.0" />
+                        <Font name="System Bold" size="38.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="30.0" right="10.0" />
@@ -678,12 +664,12 @@
             </VBox>
          </content>
          <GridPane.margin>
-            <Insets />
+            <Insets right="5.0" />
          </GridPane.margin>
       </ScrollPane>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
          <children>
-            <VBox alignment="CENTER" minHeight="150.0" minWidth="150.0" prefHeight="150.0" stylesheets="@styles.css">
+            <VBox alignment="CENTER" maxHeight="150.0" maxWidth="150.0" minHeight="150.0" minWidth="150.0" prefHeight="150.0" stylesheets="@styles.css">
                <children>
                   <Label alignment="CENTER" text="Punktezahl:" textFill="WHITE">
                      <font>
@@ -707,7 +693,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </VBox>
-            <VBox alignment="CENTER" maxHeight="100.0" prefHeight="61.0" prefWidth="150.0" stylesheets="@styles.css">
+            <VBox alignment="CENTER" maxHeight="100.0" maxWidth="150.0" prefHeight="61.0" prefWidth="150.0" stylesheets="@styles.css">
                <styleClass>
                   <String fx:value="infoBox-Gameboard" />
                   <String fx:value="shadow" />

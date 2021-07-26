@@ -2,6 +2,7 @@ Regeln:
 
 - Wörter müssen vertikal gelegt werden
 - mindestens ein Buchstabe muss mit dem des horizontal gelegten Wortes übereinstimmen
+- statt 'ẞ' muss 'ss' geschrieben werden
 - Punkte werden anhand der im Wort enthaltenen Buchstaben wie folgt gewertet.
 
 Wertung:

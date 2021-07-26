@@ -18,9 +18,9 @@ import backend.entities.Player;
 
 public class CreateDatabase {
 
-	private final static String URL = "jdbc:mariadb://localhost/wordPuzzler";
-	private final static String USER = "root";
-	private final static String PASSWORD = "";
+	private final static String URL = Constant.MARIA_DB_URL;
+	private final static String USER = Constant.MARIA_DB_USER;
+	private final static String PASSWORD = Constant.MARIA_DB_PASSWORD;
 	
 	private final static String CREATE_LOGIN_TABLE = "CREATE TABLE logins ("
 			+ "id INT NOT NULL AUTO_INCREMENT,"

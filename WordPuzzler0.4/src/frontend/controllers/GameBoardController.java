@@ -6,16 +6,16 @@ public class GameBoardController {
 
 	
 	
-	private char[][] virtuellBoard;
+	private char[][] board;
 		
 		
 	/**
-	 * costum constructor with rows and columns for the size of virtuellBoard array	
+	 * costum constructor with rows and columns for the size of board array	
 	 * @param rows number of rows
 	 * @param columns number of columns
 	 */
 	public GameBoardController(int rows, int columns) {
-			virtuellBoard = new char[rows][columns];
+			board = new char[rows][columns];
 			System.out.println("board erzeugt" + rows + " " + columns);
 	}
 	
@@ -25,7 +25,7 @@ public class GameBoardController {
 	 * @param p the position in the array
 	 */
 	public void setLetterAtPosition(char c, Position p) {
-		this.virtuellBoard[p.getY()][p.getX()] = c;
+		this.board[p.getY()][p.getX()] = c;
 		
 		
 	}
@@ -35,9 +35,9 @@ public class GameBoardController {
 	 * @param p the position
 	 */
 	public void deleteLetterFromPosition(Position p) {
-		if(this.virtuellBoard[p.getY()][p.getX()]!= 0) {
-			System.out.println(	String.valueOf(virtuellBoard[p.getY()][p.getX()])	 + " - geloescht");
-			this.virtuellBoard[p.getY()][p.getX()] = 0;
+		if(this.board[p.getY()][p.getX()]!= 0) {
+			System.out.println(	String.valueOf(board[p.getY()][p.getX()])	 + " - geloescht");
+			this.board[p.getY()][p.getX()] = 0;
 			
 		}	
 		
@@ -49,7 +49,7 @@ public class GameBoardController {
 	 * @return true if filled false if empty
 	 */
 	public boolean positionFilled(Position p) {
-		return (this.virtuellBoard[p.getY()][p.getX()]!= 0) ?  true : false;
+		return (this.board[p.getY()][p.getX()]!= 0) ?  true : false;
 	}
 	
 	/**
@@ -63,24 +63,24 @@ public class GameBoardController {
 		int indexWordStart = 0;
 		int indexWordEnd = 0;
 		// determine first index of the word
-		for (int i = 0; i < virtuellBoard.length; i++) {
-			if (virtuellBoard[i][column] != 0) {
+		for (int i = 0; i < board.length; i++) {
+			if (board[i][column] != 0) {
 				indexWordStart = i;
 				break;
 			}
 		
 		}
 		// determine last index of the word
-		for (int i = virtuellBoard.length-1; i > -1; i--) {
-			if (virtuellBoard[i][column] != 0) {
+		for (int i = board.length-1; i > -1; i--) {
+			if (board[i][column] != 0) {
 			indexWordEnd = i;
 			break;	
 			}
 		}
 			
 		while (indexWordStart <= indexWordEnd) {
-			result = result.concat(String.valueOf(virtuellBoard[indexWordStart][column]));
-			if(virtuellBoard[indexWordStart][column] == 0) {
+			result = result.concat(String.valueOf(board[indexWordStart][column]));
+			if(board[indexWordStart][column] == 0) {
 				throw new Exception("Wort enthält ein Leerzeichen");
 			}
 			indexWordStart++;

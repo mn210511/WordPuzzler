@@ -8,9 +8,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import app.MessageBox;
-import app.Navigator;
 import backend.entities.GameData;
 import backend.entities.Position;
+import backend.services.KeyBoardHandler;
 import backend.services.PointJudge;
 import backend.services.RulesReader;
 import javafx.application.Platform;
@@ -122,9 +122,9 @@ public class GameViewController extends CommonPropertyController {
 		
 
 		//adding the eventHandler, needed to navigate through the board with the arrow keys
-		gridBoard.setOnKeyPressed(new Navigator(this));
+		gridBoard.setOnKeyPressed(new KeyBoardHandler(this));
 
-		String beginn = val.getRandomWord().toUpperCase();
+		String beginn = dictionary.getRandomWord().toUpperCase();
 		txtRules.setEditable(false);
 		usedColumn = new HashSet<>();
 		char[] beginnArray = beginn.toCharArray();
@@ -295,6 +295,25 @@ public class GameViewController extends CommonPropertyController {
 		//TODO: test more
 		gridBoard.requestFocus();
 	}
+	/**
+	 * overload of the clickedLetter method with a String for the KeyEventHandler
+	 * @param letter
+	 */
+	public void clickedLetter(String letter) {
+		
+	
+		selectedLetter = letter.charAt(0);
+
+		// without this we would be able to change the Core-Word
+		if (currentPosition.getY() != BEGINN_WORD_ROW) {
+
+			gameBoard.setLetterAtPosition(selectedLetter, currentPosition);
+
+			addLetterToGrid(currentPosition, selectedLetter);
+		}
+		//TODO: test more
+		gridBoard.requestFocus();
+	}
 
 	/**
 	 * sets a letter in the gridPane to show the user his input.
@@ -309,7 +328,11 @@ public class GameViewController extends CommonPropertyController {
 				
 				if (n instanceof StackPane) {
 					Node t = ((StackPane) n).getChildren().get(0);
-					n.getStyleClass().add("cellFilled");
+					// only add it if it does not contain it already
+					if(!n.getStyleClass().contains("cellFilled")) {
+						n.getStyleClass().add("cellFilled");
+					}
+					
 					((Text) t).setText(String.valueOf(letter));
 
 				} else {
@@ -340,7 +363,7 @@ public class GameViewController extends CommonPropertyController {
 		try {
 			String result = gameBoard.getWordFromColumn(currentPosition.getX());
 
-			if (val.testWord(result)) {
+			if (dictionary.testWord(result)) {
 				usedColumn.add(currentPosition.getX());
 				int points = PointJudge.rate(result);
 				game.setScore(game.getScore() + points);
@@ -374,7 +397,7 @@ public class GameViewController extends CommonPropertyController {
 				if (MessageBox.show("word not found",
 						"Wort \"%s\" nicht ist nicht im Wörterbuch \n Wort hinzufügen?".formatted(result),
 						AlertType.CONFIRMATION, ButtonType.YES, ButtonType.NO) == ButtonType.YES) {
-					if (val.addWord(result.toLowerCase()) == true) {
+					if (dictionary.addWord(result.toLowerCase()) == true) {
 						onSubmit(ev);
 					} else {
 						MessageBox.show("Error", "Wort hinzufügen war nicht erfolgreich");
@@ -409,7 +432,8 @@ public class GameViewController extends CommonPropertyController {
 					for (Node n : gridBoard.getChildren()) {
 						if (GridPane.getColumnIndex(n) == currentPosition.getX() && GridPane.getRowIndex(n) == i) {
 							if (n instanceof StackPane) {
-								// index 1 because it is the 2nd class that we have set
+								// index 1 because it is the 2nd class that we have set and we do not want to remove the first 
+								// because it gives the cell her standard look
 								n.getStyleClass().remove(1);
 								Node t = ((StackPane) n).getChildren().get(0);
 								;
