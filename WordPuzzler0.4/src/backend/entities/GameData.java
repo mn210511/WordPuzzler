@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class GameData {
-	private static int counter;
+
 	private int id;
 	private Player player;
 	private Long duration;
@@ -19,7 +19,7 @@ public class GameData {
 		super();
 		this.player = player;
 		this.matchstart = matchstart;
-		this.id = ++counter;
+
 	}
 	
 	public GameData(LocalDateTime matchstart) {

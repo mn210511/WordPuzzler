@@ -71,11 +71,9 @@ public class GameViewController extends CommonPropertyController {
 	@FXML
 	private VBox historyContainer;
 
-	private
+	private	Timer myTimer;
 
-	Timer myTimer;
-
-	String rules;
+	private String rules;
 
 	@FXML
 	private Label lblScore;
@@ -90,7 +88,7 @@ public class GameViewController extends CommonPropertyController {
 	private HashSet<Integer> usedColumn;
 	private GameBoardController gameBoard;
 	private Position currentPosition = new Position(0, 0);
-	BooleanProperty bool = new SimpleBooleanProperty();
+
 
 	public GameViewController() {
 		game = new GameData(LocalDateTime.now());
